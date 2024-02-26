@@ -22,15 +22,11 @@ namespace Ecommerce.Entities
         public int Stock { get; set; }
         [Required]
         public int CategoryId { get; set; }
-        public Product(string name, string description, decimal price, string imageUrl, int stock, int categoryId)
-        {
-            Name = name;
-            Description = description;
-            Price = price;
-            ImageUrl = imageUrl;
-            Stock = stock;
-            CategoryId = categoryId;
-        }
+        public Category Category { get; set; } // Propiedad de navegación para la categoría
+
+        [Required]
+        public int BrandId { get; set; }
+        public Brand Brand { get; set; }
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Ecommerce.Entities;
-using Ecommerce.Models;
+using Ecommerce.Models.ProductDto;
 using Ecommerce.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,14 +22,17 @@ namespace Ecommerce.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts(
-            [FromQuery] int? categoryId,
-            [FromQuery] decimal? minPrice,
-            [FromQuery] decimal? maxPrice,
-            [FromQuery] int page = 1,
-            [FromQuery] int pageSize = 10)
+    [FromQuery] int? categoryId,
+    [FromQuery] decimal? minPrice,
+    [FromQuery] decimal? maxPrice,
+    [FromQuery] int? brandId,
+    [FromQuery] string? orderBy, // Nuevo parámetro para ordenar
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 10)
         {
             var productsQuery = _productRepository.GetProducts();
 
+            // Aplicar filtros
             if (categoryId.HasValue)
             {
                 productsQuery = productsQuery.Where(p => p.CategoryId == categoryId.Value);
@@ -45,9 +48,39 @@ namespace Ecommerce.Controllers
                 productsQuery = productsQuery.Where(p => p.Price <= maxPrice.Value);
             }
 
+            if (brandId.HasValue)
+            {
+                productsQuery = productsQuery.Where(p => p.BrandId == brandId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(orderBy))
+            {
+                switch (orderBy.ToLower())
+                {
+                    case "name_asc":
+                        productsQuery = productsQuery.OrderBy(p => p.Name);
+                        break;
+                    case "name_desc":
+                        productsQuery = productsQuery.OrderByDescending(p => p.Name);
+                        break;
+                    case "price_asc":
+                        productsQuery = productsQuery.OrderBy(p => p.Price);
+                        break;
+                    case "price_desc":
+                        productsQuery = productsQuery.OrderByDescending(p => p.Price);
+                        break;
+                    default:
+                        // Orden predeterminado, por ejemplo, podrías ordenar por nombre ascendente
+                        productsQuery = productsQuery.OrderBy(p => p.Name);
+                        break;
+                }
+            }
+
+            // Contar el total de productos antes de la paginación
             var totalCount = await productsQuery.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
+            // Aplicar paginación
             var products = await productsQuery
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -95,14 +128,14 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(ProductDto productDto)
+        public async Task<IActionResult> UpdateProduct(int id, ProductForUpdateDto productDto)
         {
             if (productDto == null)
             {
                 return BadRequest();
             }
 
-            var existingProduct = await _productRepository.GetProductByIdAsync(productDto.Id);
+            var existingProduct = await _productRepository.GetProductByIdAsync(id);
             if (existingProduct == null)
             {
                 return NotFound();

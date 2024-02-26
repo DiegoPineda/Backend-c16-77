@@ -135,3 +135,4 @@ D:\VisualStudioProjects\Backend-c16-77\Ecommerce\obj\Debug\net8.0\refint\Ecommer
 D:\VisualStudioProjects\Backend-c16-77\Ecommerce\obj\Debug\net8.0\Ecommerce.pdb
 D:\VisualStudioProjects\Backend-c16-77\Ecommerce\obj\Debug\net8.0\Ecommerce.genruntimeconfig.cache
 D:\VisualStudioProjects\Backend-c16-77\Ecommerce\obj\Debug\net8.0\ref\Ecommerce.dll
+D:\VisualStudioProjects\Backend-c16-77\Ecommerce\obj\Debug\net8.0\Ecommerce.sourcelink.json

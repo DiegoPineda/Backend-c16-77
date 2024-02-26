@@ -1,23 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Ecommerce.Models
+namespace Ecommerce.Models.ProductDto
 {
-    public class ProductForCreationDto
+    public class ProductForUpdateDto
     {
         [Required(ErrorMessage = "Deberias escribir un nombre.")]
         [MaxLength(50)]
         public string Name { get; set; } = string.Empty;
         [Required]
-        [MaxLength(200)]
         public string Description { get; set; } = string.Empty;
         [Required]
         public decimal Price { get; set; }
         [Required]
-        [MaxLength(50)]
         public string ImageUrl { get; set; } = string.Empty;
         [Required]
         public int Stock { get; set; }
         [Required]
         public int CategoryId { get; set; }
+        [Required]
+        public int BrandId { get; set; }
+        [Required]
+        public bool Paused { get; set; }
     }
 }

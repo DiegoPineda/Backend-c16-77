@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Ecommerce.Models.ProductDto;
 
 namespace Ecommerce.Profiles
 {
@@ -6,10 +7,11 @@ namespace Ecommerce.Profiles
     {
         public ProductProfile()
         {
-            CreateMap<Entities.Product, Models.ProductDto>();
-            CreateMap<Entities.Product, Models.ProductForListDto>();
-            CreateMap<Models.ProductDto, Entities.Product>();
-            CreateMap<Models.ProductForCreationDto, Entities.Product>();
+            CreateMap<Entities.Product, ProductDto>();
+            CreateMap<Entities.Product, ProductForListDto>();
+            CreateMap<ProductDto, Entities.Product>();
+            CreateMap<ProductForUpdateDto, Entities.Product>();
+            CreateMap<ProductForCreationDto, Entities.Product>();
         }
     }
 }
