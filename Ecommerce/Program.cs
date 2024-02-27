@@ -2,6 +2,7 @@ using Ecommerce.DbContexts;
 using Ecommerce.Services;
 using Ecommerce.Services.BrandService;
 using Ecommerce.Services.CategoryService;
+using Ecommerce.Services.UserService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,7 @@ builder.Services.AddScoped<IEcommerceRepository, EcommerceRepository>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 var app = builder.Build();

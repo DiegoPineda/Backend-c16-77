@@ -8,6 +8,7 @@ namespace Ecommerce.DbContexts
         public DbSet<Product> Products { get; set; } = null!;
         public DbSet<Category> Category { get; set; } = null!;
         public DbSet<Brand> Brand { get; set; } = null!;
+        public DbSet<Users> Users { get; set; } = null!;
 
 
         public EcommerceContext(DbContextOptions<EcommerceContext> options)
