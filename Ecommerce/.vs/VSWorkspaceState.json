@@ -1,11 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Controllers",
-    "\\Entities",
-    "\\Migrations",
-    "\\Services",
-    "\\Services\\UserService"
+    ""
   ],
   "SelectedNode": "\\Ecommerce.sln",
   "PreviewInSolutionExplorer": false
