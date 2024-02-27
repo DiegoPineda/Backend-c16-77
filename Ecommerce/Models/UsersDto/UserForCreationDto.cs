@@ -9,7 +9,5 @@
         public string Celular { get; set; }
         public string Direccion { get; set; }
         public int Dni { get; set; }
-        public bool Admin { get; set; } = false;
-        public bool Authenticate { get; set; } = false;
     }
 }

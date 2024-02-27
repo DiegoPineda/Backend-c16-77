@@ -28,22 +28,35 @@ namespace Ecommerce.Controllers
 
             return Ok(usersDto);
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> getIdUserAsync(int id)
-        {
-            if(id == 0) { return BadRequest(); }
-
-            var userId = await _userRepository.UsersAsync(id);
-            var responseid = _mapper.Map<UsuarioDto>(userId);
-            return Ok(responseid);
-        }
         [HttpPost]
-        public async Task<ActionResult<Users>> CreateUser(UserForCreationDto user)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+  
+        public async Task<ActionResult<Users>> CreateUser([FromBody]UserForCreationDto user)
         {
-            
-            var newUser = _mapper.Map<Users>(user);
-            await _userRepository.AddUsersAsync(newUser);
-            return CreatedAtAction(nameof(getIdUserAsync), new { id = newUser.Id }, newUser);
+            try
+            {
+                var newUser = _mapper.Map<Users>(user);
+                await _userRepository.AddUsersAsync(newUser);
+                return CreatedAtAction("GetIdUserAsync", new { id = newUser.Id }, newUser);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error interno del servidor");
+            }
+        }
+
+        [HttpGet("{id}", Name ="GetUser")]
+        public async Task<ActionResult<UsuarioDto>> GetIdUserAsync(int id)
+        {
+            var userId = await _userRepository.UsersAsync(id);
+
+            if (userId == null)
+            {
+                return NotFound(); // Usuario no encontrado
+            }
+
+            var responseId = _mapper.Map<UsuarioDto>(userId);
+            return Ok(responseId);
         }
 
 
