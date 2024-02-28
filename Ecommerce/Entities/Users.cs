@@ -21,17 +21,19 @@ namespace Ecommerce.Entities
         [Range(0, 99999999)]
         public int Dni { get; set; }
         [Required]
-        [StringLength(50)]  
+        [StringLength(50)]
         public string LastName { get; set; }
         [Required]
         [StringLength(50)]
         public string Direccion { get; set; }
         [Required]
         [StringLength(50)]
-        public string Celular {  get; set; }
+        public string Celular { get; set; }
         [Required]
-        public bool Admin {  get; set; } = false;
+        public bool Admin { get; set; } = false;
         [Required]
         public bool Authenticate { get; set; } = false;
+        public Cart Cart { get; set; }
+
     }
 }

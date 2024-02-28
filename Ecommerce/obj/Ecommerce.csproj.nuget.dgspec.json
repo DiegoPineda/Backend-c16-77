@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PRINCE\\Desktop\\Backend-NoCountry\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj": {}
+    "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PRINCE\\Desktop\\Backend-NoCountry\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj": {
+    "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PRINCE\\Desktop\\Backend-NoCountry\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
+        "projectUniqueName": "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
         "projectName": "Ecommerce",
-        "projectPath": "C:\\Users\\PRINCE\\Desktop\\Backend-NoCountry\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
-        "packagesPath": "C:\\Users\\PRINCE\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PRINCE\\Desktop\\Backend-NoCountry\\Backend-c16-77\\Ecommerce\\obj\\",
+        "projectPath": "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
+        "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
+        "outputPath": "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\PRINCE\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -86,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

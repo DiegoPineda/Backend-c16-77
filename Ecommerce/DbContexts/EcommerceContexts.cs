@@ -9,6 +9,8 @@ namespace Ecommerce.DbContexts
         public DbSet<Category> Category { get; set; } = null!;
         public DbSet<Brand> Brand { get; set; } = null!;
         public DbSet<Users> Users { get; set; } = null!;
+        public DbSet<Cart> Cart { get; set; } = null!;
+        public DbSet<CartItem> CartItem { get; set; } = null!;
 
 
         public EcommerceContext(DbContextOptions<EcommerceContext> options)

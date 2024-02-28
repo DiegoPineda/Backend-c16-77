@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Models.UsersDto
+﻿using Ecommerce.Entities;
+
+namespace Ecommerce.Models.UsersDto
 {
     public class UsuarioDto
     {
@@ -11,6 +13,7 @@
         public string Celular { get; set; }
         public bool Admin { get; set; } = false;
         public bool Authenticate { get; set; } = false;
+        public Cart Cart { get; set; }
 
     }
 }

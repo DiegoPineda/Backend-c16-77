@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Models.UsersDto
+﻿using Ecommerce.Entities;
+
+namespace Ecommerce.Models.UsersDto
 {
     public class UserForCreationDto
     {
@@ -9,5 +11,6 @@
         public string Celular { get; set; }
         public string Direccion { get; set; }
         public int Dni { get; set; }
+        public Cart Cart { get; set; }
     }
 }

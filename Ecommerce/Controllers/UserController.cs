@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Ecommerce.Entities;
 using Ecommerce.Models.UsersDto;
-using Ecommerce.Services;
 using Ecommerce.Services.UserService;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Controllers
 {
@@ -30,12 +28,14 @@ namespace Ecommerce.Controllers
         }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-  
-        public async Task<ActionResult<Users>> CreateUser([FromBody]UserForCreationDto user)
+
+        public async Task<ActionResult<Users>> CreateUser([FromBody] UserForCreationDto user)
         {
             try
             {
                 var newUser = _mapper.Map<Users>(user);
+                var cart = new Cart();
+                newUser.Cart = cart;
                 await _userRepository.AddUsersAsync(newUser);
                 return CreatedAtAction("GetIdUserAsync", new { id = newUser.Id }, newUser);
             }
@@ -45,7 +45,7 @@ namespace Ecommerce.Controllers
             }
         }
 
-        [HttpGet("{id}", Name ="GetUser")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<ActionResult<UsuarioDto>> GetIdUserAsync(int id)
         {
             var userId = await _userRepository.UsersAsync(id);
