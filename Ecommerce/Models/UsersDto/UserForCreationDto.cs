@@ -11,6 +11,5 @@ namespace Ecommerce.Models.UsersDto
         public string Celular { get; set; }
         public string Direccion { get; set; }
         public int Dni { get; set; }
-        public Cart Cart { get; set; }
     }
 }

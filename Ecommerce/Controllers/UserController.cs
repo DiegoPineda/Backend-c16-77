@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Ecommerce.Entities;
+using Ecommerce.Models.ProductDto;
 using Ecommerce.Models.UsersDto;
+using Ecommerce.Services.CartService;
 using Ecommerce.Services.UserService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,15 +10,17 @@ namespace Ecommerce.Controllers
 {
     [Route("api/Users")]
     [ApiController]
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly ICartRepository _cartRepository;
 
-        public UserController(IUserRepository userRepository, IMapper mapper)
+        public UserController(IUserRepository userRepository, IMapper mapper, ICartRepository cart)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _cartRepository = cart;
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UsuarioDto>>> GetUsuarios()
@@ -27,23 +31,41 @@ namespace Ecommerce.Controllers
             return Ok(usersDto);
         }
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-
-        public async Task<ActionResult<Users>> CreateUser([FromBody] UserForCreationDto user)
+        [HttpPost]
+        public async Task<ActionResult<Users>> CreateUser(UserForCreationDto user)
         {
-            try
+            if (user == null)
             {
-                var newUser = _mapper.Map<Users>(user);
-                var cart = new Cart();
-                newUser.Cart = cart;
-                await _userRepository.AddUsersAsync(newUser);
-                return CreatedAtAction("GetIdUserAsync", new { id = newUser.Id }, newUser);
+                return BadRequest("User cannot be null");
             }
-            catch (Exception ex)
+
+            var newUser = _mapper.Map<Users>(user);
+
+            // Crear un nuevo carrito asociado al nuevo usuario
+            var cart = new Cart
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error interno del servidor");
-            }
+                UserId = newUser.Id  // Establecer el UserId del carrito como el Id del nuevo usuario
+            };
+
+            // Inicializar la lista de ítems del carrito
+            cart.Items = new List<CartItem>();
+
+            // Asociar el carrito creado al nuevo usuario
+            newUser.Cart = cart;
+
+            // Agregar el nuevo usuario a la base de datos
+            _userRepository.AddUsersAsync(newUser);
+
+            // Guardar los cambios en la base de datos
+            await _userRepository.SaveAsync();
+            _cartRepository.UpdateCartAsync(cart);
+            await _cartRepository.SaveAsync();
+
+            // Retornar el nuevo usuario creado
+            return CreatedAtAction(nameof(GetIdUserAsync), new { id = newUser.Id }, newUser);
         }
+
+
 
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<ActionResult<UsuarioDto>> GetIdUserAsync(int id)

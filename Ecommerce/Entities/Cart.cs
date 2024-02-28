@@ -12,22 +12,10 @@ namespace Ecommerce.Entities
         // Propiedad de navegación para el usuario propietario del carrito
         [Required]
         public int UserId { get; set; }
-        public Users User { get; set; }
 
         // Lista de productos en el carrito
         [Required]
         public virtual ICollection<CartItem> Items { get; set; }
-
-        // Precio total del carrito
-        [NotMapped] // Este atributo no se mapeará a la base de datos
-        public decimal TotalPrice => CalculateTotalPrice();
-
-        private decimal CalculateTotalPrice()
-        {
-            if (Items == null)
-                return 0;
-
-            return Items.Sum(item => item.Product.Price * item.Quantity);
-        }
+        public decimal TotalPrice { get; set; }
     }
 }

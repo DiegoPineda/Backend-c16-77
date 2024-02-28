@@ -13,7 +13,7 @@ namespace Ecommerce.Models.UsersDto
         public string Celular { get; set; }
         public bool Admin { get; set; } = false;
         public bool Authenticate { get; set; } = false;
-        public Cart Cart { get; set; }
+        public int CartId { get; set; }
 
     }
 }

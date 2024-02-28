@@ -6,8 +6,8 @@ namespace Ecommerce.Services.UserService
     {
         Task<IEnumerable<Users>> getAllUsersAsync();
         Task<Users> UsersAsync(int id);
-        Task AddUsersAsync(Users users);
+        void AddUsersAsync(Users users);
         Task UpdateUsersAsync(Users users);
-
+        Task SaveAsync();
     }
 }

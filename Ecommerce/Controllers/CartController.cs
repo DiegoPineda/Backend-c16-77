@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Entities;
+using Ecommerce.Services;
 using Ecommerce.Services.CartService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,12 @@ namespace Ecommerce.Controllers
     public class CartController : ControllerBase
     {
         private readonly ICartRepository _cartRepository;
+        private readonly IEcommerceRepository _productRepository;
 
-        public CartController(ICartRepository cartRepository)
+        public CartController(ICartRepository cartRepository, IEcommerceRepository productRepository)
         {
             _cartRepository = cartRepository;
+            _productRepository = productRepository;
         }
 
         [HttpPost("{userId}/addProduct/{productId}")]
@@ -28,6 +31,17 @@ namespace Ecommerce.Controllers
                 }
 
                 // Aquí deberías agregar lógica para verificar la existencia del producto y su disponibilidad
+                var product = await _productRepository.GetProductByIdAsync(productId);
+
+                if (product == null)
+                {
+                    return NotFound("Product not found");
+                }
+
+                if (product.Stock < quantity)
+                {
+                    return BadRequest("Not enough stock available");
+                }
 
                 var cartItem = cart.Items.FirstOrDefault(item => item.ProductId == productId);
 
@@ -85,5 +99,32 @@ namespace Ecommerce.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetCartByUserId(int userId)
+        {
+            try
+            {
+                var cart = await _cartRepository.GetCartByUserIdAsync(userId);
+
+                if (cart == null)
+                {
+                    return NotFound("Cart not found for the user");
+                }
+                cart.TotalPrice = CalculateTotalPrice(cart);
+                return Ok(cart);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        private decimal CalculateTotalPrice(Cart cart)
+        {
+            if (cart.Items == null)
+                return 0;
+
+            return cart.Items.Sum(item => item.Product.Price * item.Quantity);
+        }
+
     }
 }

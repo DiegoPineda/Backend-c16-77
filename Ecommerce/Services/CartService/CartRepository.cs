@@ -25,5 +25,14 @@ namespace Ecommerce.Services.CartService
             _context.Entry(cart).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
+        public async Task AddCartAsync(Cart cart)
+        {
+            await _context.Cart.AddAsync(cart);
+        }
+
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

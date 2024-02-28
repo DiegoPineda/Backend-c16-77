@@ -6,5 +6,7 @@ namespace Ecommerce.Services.CartService
     {
         Task<Cart> GetCartByUserIdAsync(int userId);
         Task UpdateCartAsync(Cart cart);
+        Task AddCartAsync(Cart cart);
+        Task SaveAsync();
     }
 }

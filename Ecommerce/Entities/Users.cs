@@ -33,6 +33,8 @@ namespace Ecommerce.Entities
         public bool Admin { get; set; } = false;
         [Required]
         public bool Authenticate { get; set; } = false;
+        [Required]
+        public int CartId { get; set; }
         public Cart Cart { get; set; }
 
     }

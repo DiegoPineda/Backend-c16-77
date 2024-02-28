@@ -21,14 +21,21 @@ namespace Ecommerce.Services.UserService
         {
             return await _context.Users.FindAsync(id);
         }
-        public async Task AddUsersAsync(Users users)
+        public void AddUsersAsync(Users users)
         {
+            if (users == null)
+            {
+                throw new ArgumentNullException(nameof(users));
+            }
             _context.Users.Add(users);
-            await _context.SaveChangesAsync();
         }
         public async Task UpdateUsersAsync(Users users)
         {
             _context.Entry(users).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+        public async Task SaveAsync()
+        {
             await _context.SaveChangesAsync();
         }
     }
