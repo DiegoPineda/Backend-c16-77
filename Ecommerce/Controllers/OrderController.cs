@@ -1,11 +1,13 @@
 ﻿using Ecommerce.Services.Orderservice;
 using Ecommerce.Services.UserService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository _orderRepository;

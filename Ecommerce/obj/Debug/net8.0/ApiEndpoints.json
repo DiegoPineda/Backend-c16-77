@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "Ecommerce.Controllers.AuthenticationController",
+    "Method": "Validar",
+    "RelativePath": "api/Authentication/Validate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Ecommerce.Models.UsersDto.UserLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Ecommerce.Controllers.BrandController",
     "Method": "GetAllBrands",
     "RelativePath": "api/brand",
@@ -94,6 +110,53 @@
   },
   {
     "ContainingType": "Ecommerce.Controllers.CartController",
+    "Method": "AddToCart",
+    "RelativePath": "api/Cart",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "quantity",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.CartController",
+    "Method": "RemoveFromCart",
+    "RelativePath": "api/Cart",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.CartController",
     "Method": "GetCartByUserId",
     "RelativePath": "api/Cart/{userId}",
     "HttpMethod": "GET",
@@ -110,45 +173,14 @@
   },
   {
     "ContainingType": "Ecommerce.Controllers.CartController",
-    "Method": "AddProductToCart",
-    "RelativePath": "api/Cart/{userId}/addProduct/{productId}",
+    "Method": "ClearCart",
+    "RelativePath": "api/Cart/{userId}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "productId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "quantity",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Ecommerce.Controllers.CartController",
-    "Method": "RemoveProductFromCart",
-    "RelativePath": "api/Cart/{userId}/removeProduct/{productId}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "productId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -243,6 +275,22 @@
       {
         "Name": "categoryModel",
         "Type": "Ecommerce.Models.CategoryDto.CategoryForUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.OrderController",
+    "Method": "CreateOrderFromCart",
+    "RelativePath": "api/Order/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

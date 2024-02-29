@@ -1,12 +1,14 @@
 ﻿using Ecommerce.Services;
 using Ecommerce.Services.CartService;
 using Ecommerce.Services.UserService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CartController : ControllerBase
     {
         private readonly ICartRepository _cartRepository;

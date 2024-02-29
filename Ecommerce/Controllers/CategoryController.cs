@@ -2,12 +2,14 @@
 using Ecommerce.Entities;
 using Ecommerce.Models.CategoryDto;
 using Ecommerce.Services.CategoryService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers
 {
     [Route("api/category")]
     [ApiController]
+    [Authorize]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
@@ -42,6 +44,7 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<Category>> CreateCategory(CategoryForCreationDto categoryModel)
         {
             var category = _mapper.Map<Category>(categoryModel);
@@ -50,6 +53,7 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> UpdateCategory(int id, CategoryForUpdateDto categoryModel)
         {
             var category = await _categoryRepository.GetCategoryByIdAsync(id);

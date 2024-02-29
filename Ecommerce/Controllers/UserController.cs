@@ -3,6 +3,7 @@ using Ecommerce.Entities;
 using Ecommerce.Models.UsersDto;
 using Ecommerce.Services.CartService;
 using Ecommerce.Services.UserService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers
@@ -22,6 +23,7 @@ namespace Ecommerce.Controllers
             _cartRepository = cart;
         }
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UsuarioDto>>> GetUsuarios()
         {
             var usersFromRepo = await _userRepository.getAllUsersAsync();
@@ -29,7 +31,6 @@ namespace Ecommerce.Controllers
 
             return Ok(usersDto);
         }
-        [HttpPost]
         [HttpPost]
         public async Task<ActionResult<Users>> CreateUser(UserForCreationDto user)
         {
@@ -64,8 +65,9 @@ namespace Ecommerce.Controllers
         }
 
 
-
+        
         [HttpGet("{id}", Name = "GetUser")]
+        [Authorize]
         public async Task<ActionResult<UsuarioDto>> GetIdUserAsync(int id)
         {
             var userId = await _userRepository.UsersAsync(id);

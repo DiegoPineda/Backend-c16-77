@@ -2,12 +2,14 @@
 using Ecommerce.Entities;
 using Ecommerce.Models.BrandDto;
 using Ecommerce.Services.BrandService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers
 {
     [Route("api/brand")]
     [ApiController]
+    [Authorize]
     public class BrandController : ControllerBase
     {
         private readonly IBrandRepository _brandRepository;
@@ -41,6 +43,7 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<Brand>> CreateBrand(BrandForCreationDto brandModel)
         {
             var brand = _mapper.Map<Brand>(brandModel);
@@ -49,6 +52,7 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> UpdateBrand(int id, BrandForUpdateDto brandModel)
         {
             var brand = await _brandRepository.GetBrandByIdAsync(id);

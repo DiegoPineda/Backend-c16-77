@@ -2,6 +2,7 @@
 using Ecommerce.Entities;
 using Ecommerce.Models.ProductDto;
 using Ecommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -111,6 +112,8 @@ namespace Ecommerce.Controllers
 
 
         [HttpPost]
+        [Authorize]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<ProductDto>> AddProduct(ProductForCreationDto productForCreationDto)
         {
             if (productForCreationDto == null)
@@ -128,6 +131,8 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> UpdateProduct(int id, ProductForUpdateDto productDto)
         {
             if (productDto == null)
@@ -148,6 +153,8 @@ namespace Ecommerce.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var existingProduct = await _productRepository.GetProductByIdAsync(id);

@@ -412,3 +412,4 @@ C:\Users\Diego\Desktop\Backend-c16-77\Ecommerce\obj\Debug\net8.0\refint\Ecommerc
 C:\Users\Diego\Desktop\Backend-c16-77\Ecommerce\obj\Debug\net8.0\Ecommerce.pdb
 C:\Users\Diego\Desktop\Backend-c16-77\Ecommerce\obj\Debug\net8.0\Ecommerce.genruntimeconfig.cache
 C:\Users\Diego\Desktop\Backend-c16-77\Ecommerce\obj\Debug\net8.0\ref\Ecommerce.dll
+C:\Users\Diego\Desktop\Backend-c16-77\Ecommerce\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
