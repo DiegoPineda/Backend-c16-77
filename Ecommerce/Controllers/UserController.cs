@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Ecommerce.Entities;
-using Ecommerce.Models.ProductDto;
 using Ecommerce.Models.UsersDto;
 using Ecommerce.Services.CartService;
 using Ecommerce.Services.UserService;
@@ -41,25 +40,24 @@ namespace Ecommerce.Controllers
 
             var newUser = _mapper.Map<Users>(user);
 
-            // Crear un nuevo carrito asociado al nuevo usuario
-            var cart = new Cart
-            {
-                UserId = newUser.Id  // Establecer el UserId del carrito como el Id del nuevo usuario
-            };
 
-            // Inicializar la lista de ítems del carrito
-            cart.Items = new List<CartItem>();
 
-            // Asociar el carrito creado al nuevo usuario
-            newUser.Cart = cart;
+            var newCart = new Cart();
+            newUser.Cart = newCart; // Asociar el carrito con el usuario
+
+            // Agregar el carrito a la base de datos
+            _cartRepository.AddCartAsync(newCart);
+
+
 
             // Agregar el nuevo usuario a la base de datos
             _userRepository.AddUsersAsync(newUser);
 
             // Guardar los cambios en la base de datos
             await _userRepository.SaveAsync();
-            _cartRepository.UpdateCartAsync(cart);
-            await _cartRepository.SaveAsync();
+
+
+
 
             // Retornar el nuevo usuario creado
             return CreatedAtAction(nameof(GetIdUserAsync), new { id = newUser.Id }, newUser);

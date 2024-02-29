@@ -6,16 +6,17 @@ namespace Ecommerce.Entities
     public class Cart
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        // Propiedad de navegación para el usuario propietario del carrito
-        [Required]
+        [ForeignKey("User")]
         public int UserId { get; set; }
 
-        // Lista de productos en el carrito
+        // Propiedad de navegación hacia el usuario
+        public Users User { get; set; }
+
+        // Colección de elementos en el carrito
+        public List<CartItem> CartItems { get; set; }
+
+        // Precio total del carrito
         [Required]
-        public virtual ICollection<CartItem> Items { get; set; }
         public decimal TotalPrice { get; set; }
     }
 }

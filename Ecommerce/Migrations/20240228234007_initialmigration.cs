@@ -5,7 +5,7 @@
 namespace Ecommerce.Migrations
 {
     /// <inheritdoc />
-    public partial class initialMigration2 : Migration
+    public partial class initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,20 +21,6 @@ namespace Ecommerce.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Brand", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cart",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cart", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,12 +56,6 @@ namespace Ecommerce.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Cart_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Cart",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,6 +90,24 @@ namespace Ecommerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cart",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cart", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Cart_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CartItem",
                 columns: table => new
                 {
@@ -117,17 +115,16 @@ namespace Ecommerce.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    CartId = table.Column<int>(type: "int", nullable: false)
+                    CartUserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CartItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CartItem_Cart_CartId",
-                        column: x => x.CartId,
+                        name: "FK_CartItem_Cart_CartUserId",
+                        column: x => x.CartUserId,
                         principalTable: "Cart",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserId");
                     table.ForeignKey(
                         name: "FK_CartItem_Products_ProductId",
                         column: x => x.ProductId,
@@ -137,9 +134,9 @@ namespace Ecommerce.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItem_CartId",
+                name: "IX_CartItem_CartUserId",
                 table: "CartItem",
-                column: "CartId");
+                column: "CartUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItem_ProductId",
@@ -155,11 +152,6 @@ namespace Ecommerce.Migrations
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_CartId",
-                table: "Users",
-                column: "CartId");
         }
 
         /// <inheritdoc />
@@ -169,13 +161,13 @@ namespace Ecommerce.Migrations
                 name: "CartItem");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Cart");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Cart");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Brand");

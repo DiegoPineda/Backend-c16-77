@@ -17,6 +17,18 @@ namespace Ecommerce.DbContexts
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configurar el tipo de columna SQL para la propiedad 'TotalPrice' en la entidad 'Cart'
+            modelBuilder.Entity<Cart>()
+                .Property(c => c.TotalPrice)
+                .HasColumnType("decimal(18, 2)");
+
+            // Configurar el tipo de columna SQL para la propiedad 'Price' en la entidad 'Product'
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18, 2)");
+        }
 
     }
 }

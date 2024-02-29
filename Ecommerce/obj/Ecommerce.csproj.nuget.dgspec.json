@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Diego\\Desktop\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj": {}
+    "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Diego\\Desktop\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj": {
+    "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diego\\Desktop\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
+        "projectUniqueName": "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
         "projectName": "Ecommerce",
-        "projectPath": "C:\\Users\\Diego\\Desktop\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
+        "projectPath": "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
         "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Diego\\Desktop\\Backend-c16-77\\Ecommerce\\obj\\",
+        "outputPath": "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -87,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
