@@ -36,6 +36,7 @@ namespace Ecommerce.Entities
         [Required]
         public int CartId { get; set; }
         public Cart Cart { get; set; }
+        public List<Orders> Orders { get; set; }
 
     }
 }

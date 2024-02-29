@@ -65,7 +65,20 @@ namespace Ecommerce.Controllers
 
             return Ok(cart);
         }
+        [HttpPost("{userId}")]
+        public async Task<IActionResult> ClearCart(int userId)
+        {
+            var user = await _userRepository.UsersAsync(userId);
 
+            if (user == null)
+            {
+                return NotFound("Usuario no encontrado");
+            }
+
+            await _cartRepository.ClearCartAsync(user);
+
+            return Ok("Carrito vaciado exitosamente");
+        }
 
     }
 }

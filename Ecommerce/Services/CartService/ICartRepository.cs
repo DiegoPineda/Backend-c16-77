@@ -9,5 +9,6 @@ namespace Ecommerce.Services.CartService
         Task SaveAsync();
         Task RemoveProductFromCartAsync(Users user, int productId);
         Task<Cart> GetCartByUserIdAsync(int userId);
+        Task ClearCartAsync(Users user);
     }
 }

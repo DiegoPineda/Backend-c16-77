@@ -95,6 +95,63 @@ namespace Ecommerce.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("Ecommerce.Entities.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrdersId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrdersId");
+
+                    b.ToTable("OrderItem");
+                });
+
+            modelBuilder.Entity("Ecommerce.Entities.Orders", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("Order");
+                });
+
             modelBuilder.Entity("Ecommerce.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -219,6 +276,20 @@ namespace Ecommerce.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Ecommerce.Entities.OrderItem", b =>
+                {
+                    b.HasOne("Ecommerce.Entities.Orders", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrdersId");
+                });
+
+            modelBuilder.Entity("Ecommerce.Entities.Orders", b =>
+                {
+                    b.HasOne("Ecommerce.Entities.Users", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("UsersId");
+                });
+
             modelBuilder.Entity("Ecommerce.Entities.Product", b =>
                 {
                     b.HasOne("Ecommerce.Entities.Brand", "Brand")
@@ -243,10 +314,17 @@ namespace Ecommerce.Migrations
                     b.Navigation("CartItems");
                 });
 
+            modelBuilder.Entity("Ecommerce.Entities.Orders", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
             modelBuilder.Entity("Ecommerce.Entities.Users", b =>
                 {
                     b.Navigation("Cart")
                         .IsRequired();
+
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

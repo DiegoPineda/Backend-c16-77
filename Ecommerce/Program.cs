@@ -3,6 +3,7 @@ using Ecommerce.Services;
 using Ecommerce.Services.BrandService;
 using Ecommerce.Services.CartService;
 using Ecommerce.Services.CategoryService;
+using Ecommerce.Services.Orderservice;
 using Ecommerce.Services.UserService;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 
 var app = builder.Build();

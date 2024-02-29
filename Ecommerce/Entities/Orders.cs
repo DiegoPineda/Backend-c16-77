@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce.Entities
 {
-    public class Order
+    public class Orders
     {
         public int Id { get; set; }
         public int UserId { get; set; } // ID del usuario que realizó el pedido

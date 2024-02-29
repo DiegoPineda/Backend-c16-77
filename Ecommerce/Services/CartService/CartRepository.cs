@@ -98,5 +98,27 @@ namespace Ecommerce.Services.CartService
                 .ThenInclude(ci => ci.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
         }
+
+        public async Task ClearCartAsync(Users user)
+        {
+            var cart = await _context.Cart
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(c => c.UserId == user.Id);
+
+            if (cart == null)
+            {
+                // Si el usuario no tiene un carrito, no hay productos que eliminar
+                return;
+            }
+
+            // Eliminar todos los elementos del carrito
+            cart.CartItems.Clear();
+
+            // Reiniciar el precio total del carrito
+            cart.TotalPrice = 0;
+
+            // Guardar los cambios en la base de datos
+            await _context.SaveChangesAsync();
+        }
     }
 }
