@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "F8AaegW/CgN2gW5tXlmgz87jLjBS8xAc0R2RbRTxHGZ3xU7DzZYZvKazToCJRFdZYy3P7DY7uTh5OSzXwTLr0w==",
+  "dgSpecHash": "+vZjkYNLJKTE7PHmhChWhUfGmu8IdKkqoiDzvCGS/xylU5zOj5gnQchLcVSeiI3FmceXReGM32nVOI6hsYfrVQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Diego\\Desktop\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
+  "projectFilePath": "D:\\VisualStudioProjects\\Backend-c16-77\\Ecommerce\\Ecommerce.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Diego\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Diego\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

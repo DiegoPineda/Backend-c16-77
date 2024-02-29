@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Ecommerce.DbContexts;
+using Ecommerce.Models.UsersDto;
 using Microsoft.AspNetCore.Mvc;
-using Ecommerce.Models;
-using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using Ecommerce.Entities;
-using Ecommerce.Models.UsersDto;
-using System.Text;
-using Ecommerce.DbContexts;
+using System.Security.Claims;
 using System.Text;
 
 namespace Ecommerce.Controllers
@@ -38,12 +34,24 @@ namespace Ecommerce.Controllers
                     // Usuario encontrado, se genera el token JWT
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var key = Encoding.ASCII.GetBytes(_secretKey);
+
+                    //-----------------
+
+                    var isAdminClaimValue = user.Admin ? "true" : "false";
+                    var isAdminClaim = new Claim("Admin", isAdminClaimValue);
+
+
+
+
+
+                    //-------------------
+
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
                         Subject = new ClaimsIdentity(new Claim[]
                         {
                             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                            new Claim("Admin", user.Admin.ToString())
+                            isAdminClaim
                             // Puedes incluir más claims si lo deseas
                         }),
                         Expires = DateTime.UtcNow.AddHours(1), // Tiempo de expiración del token
