@@ -9,7 +9,6 @@ namespace Ecommerce.Controllers
 {
     [Route("api/brand")]
     [ApiController]
-    [Authorize]
     public class BrandController : ControllerBase
     {
         private readonly IBrandRepository _brandRepository;

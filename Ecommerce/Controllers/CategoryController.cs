@@ -9,7 +9,6 @@ namespace Ecommerce.Controllers
 {
     [Route("api/category")]
     [ApiController]
-    [Authorize]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
